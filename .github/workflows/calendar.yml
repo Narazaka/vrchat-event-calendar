@@ -1,0 +1,23 @@
+name: calendar
+
+on:
+  schedule:
+    - cron: 0 1,14,18,20 * * *
+
+jobs:
+  fetch-calendar:
+    name: fetch calendar
+    runs-on: ubuntu-latest
+    steps:
+      - name: mkdir
+        run: mkdir public
+      - name: fetch calendar image
+        run: curl -L -o public/calendar.png "http://drive.google.com/uc?export=view&id=1yHO79l0Oc-0tSYGE5AOEar08kIeG67cB"
+      - name: check format
+        run: [ `file --brief --mime-type public/calendar.png` = "image/png" ]
+      - name: git add
+        uses: peaceiris/actions-gh-pages@v2.3.1
+        env:
+          ACTIONS_DEPLOY_KEY: ${{secrets.ACTIONS_DEPLOY_KEY}}
+          PUBLISH_BRANCH: gh-pages
+          PUBLISH_DIR: public
