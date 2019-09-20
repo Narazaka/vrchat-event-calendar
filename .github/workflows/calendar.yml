@@ -14,7 +14,8 @@ jobs:
       - name: fetch calendar image
         run: curl -L -o public/calendar.png "http://drive.google.com/uc?export=view&id=1yHO79l0Oc-0tSYGE5AOEar08kIeG67cB"
       - name: check format
-        run: [ `file --brief --mime-type public/calendar.png` = "image/png" ]
+        run: |
+          [ `file --brief --mime-type public/calendar.png` = "image/png" ]
       - name: git add
         uses: peaceiris/actions-gh-pages@v2.3.1
         env:
