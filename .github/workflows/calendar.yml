@@ -3,6 +3,9 @@ name: calendar
 on:
   schedule:
     - cron: 0 1,14,18,20 * * *
+  push:
+    branches:
+      - master
 
 jobs:
   fetch-calendar:
