@@ -19,6 +19,8 @@ jobs:
       - name: check format
         run: |
           [ `file --brief --mime-type public/calendar.png` = "image/png" ]
+      - name: cname
+        run: echo vrchat-event-calendar.narazaka.net > public/CNAME
       - name: git add
         uses: peaceiris/actions-gh-pages@v2.3.1
         env:
