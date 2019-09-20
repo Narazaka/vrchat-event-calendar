@@ -12,6 +12,10 @@ jobs:
     name: fetch calendar
     runs-on: ubuntu-latest
     steps:
+      - name: install
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pngquant advancecomp
       - name: mkdir
         run: mkdir public
       - name: fetch calendar image
@@ -19,6 +23,10 @@ jobs:
       - name: check format
         run: |
           [ `file --brief --mime-type public/calendar.png` = "image/png" ]
+      - name: optimize
+        run: |
+          pngquant --force --ext .png --speed 1 --strip public/calendar.png
+          advpng -z -4 -i 10 public/calendar.png
       - name: cname
         run: echo vrchat-event-calendar.narazaka.net > public/CNAME
       - name: gh-pages
